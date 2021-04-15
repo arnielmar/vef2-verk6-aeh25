@@ -39,6 +39,6 @@ export interface IPaging {
 export interface IPeopleResponse {
   allPeople: {
     pageInfo: IPaging;
-    edges: ICharacter[];
+    people: ICharacter[];
   }
 }
