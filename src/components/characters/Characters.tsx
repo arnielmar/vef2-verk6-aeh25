@@ -4,9 +4,10 @@ import Link from 'next/link';
 
 import s from './Characters.module.scss';
 import { Button } from '../button/Button';
-import { ICharacter } from '../../types';
+import { ICharacter, IPeopleResponse } from '../../types';
 
 type Props = {
+  peopleResponse: IPeopleResponse;
 };
 
 /**
@@ -24,18 +25,25 @@ type Props = {
  */
 type ExcludesFalse = <T>(x: T | null | undefined | false) => x is T;
 
-export function Characters({ }: Props): JSX.Element {
+export function Characters({ peopleResponse }: Props): JSX.Element {
   // TODO meðhöndla loading state, ekki þarf sérstaklega að villu state
   const [loading, setLoading] = useState<boolean>(false);
 
   // TODO setja grunngögn sem koma frá server
   const [characters, setCharacters] = useState<Array<ICharacter>>([]);
+  //setCharacters(peopleResponse.allPeople.people);
 
   const [nextPage, setNextPage] = useState<string | null>(null);
 
   const fetchMore = async (): Promise<void> => {
-    // TODO sækja gögn frá /pages/api/characters.ts (gegnum /api/characters), ef það eru fleiri
-    // (sjá pageInfo.hasNextPage) með cursor úr pageInfo.endCursor
+    setLoading(true);
+
+    if (peopleResponse.allPeople.pageInfo.hasNextPage) {
+      // TODO sækja gögn frá /pages/api/characters.ts (gegnum /api/characters), 
+      // með cursor úr pageInfo.endCursor
+    }
+
+    setLoading(false);
   };
 
   return (

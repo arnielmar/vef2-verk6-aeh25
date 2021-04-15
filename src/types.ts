@@ -1,15 +1,7 @@
 // Hér eru þær týpur sem við skilgreinum á móti GraphQL endapunkti
 
-export interface IPerson {
-  person: {
-    id: string;
-    name?: string;
-    birthYear?: string;
-    eyeColor?: string;
-    hairColor?: string;
-    height?: number;
-    mass?: number;
-  }
+export type IPerson = {
+  person: ICharacter
 }
 
 export interface ICharacter {
@@ -39,5 +31,14 @@ export interface IFilm {
   }
 }
 
-// TODO hér ættum við að útbúa interface fyrir öll gögn sem við vinnum með (t.d. IFilm, IPaging)
-// og svör sem við fáum frá GraphQL endapunkti
+export interface IPaging {
+  hasNextPage: boolean;
+  endCursor?: string;
+}
+
+export interface IPeopleResponse {
+  allPeople: {
+    pageInfo: IPaging;
+    edges: ICharacter[];
+  }
+}
