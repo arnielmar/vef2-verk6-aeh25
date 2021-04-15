@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const result = await fetchCharacters();
 
   peopleResponse = result ?? null;
-  console.log(peopleResponse.allPeople.people)
+
   return {
     props: {
       peopleResponse,

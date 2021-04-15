@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 
@@ -10,37 +10,29 @@ type Props = {
   peopleResponse: IPeopleResponse;
 };
 
-/**
- * Hjálpar týpa ef við erum að filtera burt hugsanleg null gildi:
- *
- * const items: T = itemsWithPossiblyNull
- *  .map((item) => {
- *    if (!item) {
- *      return null;
- *    }
- *    return item;
- *  })
- *  .filter((Boolean as unknown) as ExcludesFalse);
- * items verður Array<T> en ekki Array<T | null>
- */
-type ExcludesFalse = <T>(x: T | null | undefined | false) => x is T;
-
 export function Characters({ peopleResponse }: Props): JSX.Element {
-  // TODO meðhöndla loading state, ekki þarf sérstaklega að villu state
   const [loading, setLoading] = useState<boolean>(false);
 
-  // TODO setja grunngögn sem koma frá server
   const [characters, setCharacters] = useState<Array<ICharacter>>([]);
-  //setCharacters(peopleResponse.allPeople.people);
 
-  const [nextPage, setNextPage] = useState<string | null>(null);
+  const [nextPage, setNextPage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setCharacters(peopleResponse.allPeople.people);
+    setNextPage(peopleResponse?.allPeople?.pageInfo?.endCursor);
+  });
 
   const fetchMore = async (): Promise<void> => {
     setLoading(true);
-
-    if (peopleResponse.allPeople.pageInfo.hasNextPage) {
-      // TODO sækja gögn frá /pages/api/characters.ts (gegnum /api/characters), 
-      // með cursor úr pageInfo.endCursor
+    if (nextPage) {
+      const res = (await fetch(`/api/characters?after=${nextPage}`));
+      if (res.ok) {
+        const peopleResponse: IPeopleResponse = await res.json();
+        const moreCharacters = peopleResponse.allPeople.people;
+        const nextCursor = peopleResponse.allPeople.pageInfo.endCursor;
+        await setCharacters(characters.concat(moreCharacters));
+        await setNextPage(nextCursor);
+      }
     }
 
     setLoading(false);
