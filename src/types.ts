@@ -3,7 +3,28 @@
 export interface ICharacter {
   id: string;
   name?: string;
-  // TODO fleiri týpur
+  birthYear?: string;
+  eyeColor?: string;
+  hairColor?: string;
+  height?: number;
+  mass?: number;
+}
+
+export interface IFilms {
+  allFilms: {
+    films: [
+      IFilm
+    ]
+  }
+}
+
+export interface IFilm {
+  title?: string;
+  episodeID?: number;
+  openingCrawl?: string;
+  characterConnection: {
+    characters: ICharacter[];
+  }
 }
 
 // TODO hér ættum við að útbúa interface fyrir öll gögn sem við vinnum með (t.d. IFilm, IPaging)
