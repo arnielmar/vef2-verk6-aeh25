@@ -30,8 +30,8 @@ export function Characters({ peopleResponse }: Props): JSX.Element {
         const peopleResponse: IPeopleResponse = await res.json();
         const moreCharacters = peopleResponse.allPeople.people;
         const nextCursor = peopleResponse.allPeople.pageInfo.endCursor;
-        await setCharacters(characters.concat(moreCharacters));
-        await setNextPage(nextCursor);
+        setCharacters(characters.concat(moreCharacters));
+        setNextPage(nextCursor);
       }
     }
 
