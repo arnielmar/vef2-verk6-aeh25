@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { ErrorPage } from '../../containers/Error';
 import { characterFragment } from '../../graphql/characterFragment';
 import { fetchSwapi } from '../../lib/swapi';
-import { ICharacter } from '../../types';
+import { ICharacter, IPerson } from '../../types';
 
 import { Layout } from '../../components/layout/Layout';
 import { Person } from '../../components/person/Person';
@@ -27,7 +27,7 @@ export default function PageComponent(
   return (
     <Layout>
       <Head>
-        <title>Star Wars character—{name}</title>
+        <title>Star Wars Characters - {name}</title>
       </Head>
       <Person person={person} />
     </Layout>
@@ -39,7 +39,9 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({ params
 
   const query = `
     query($id: ID!) {
-      # TODO sækja person
+      person(id: $id) {
+        ...character
+      }
     }
     ${characterFragment}
   `;
@@ -47,15 +49,13 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({ params
   let person = null;
 
   if (id) {
-    // TODO EKKI any
-    const result = await fetchSwapi<any>(query, { id });
-
-    person = result.person ?? null;
+    const result = await fetchSwapi<IPerson>(query, { id });
+    person = result ?? null;
   }
 
   return {
     props: {
-      person,
+      person: person?.person ?? null,
     },
   };
 };

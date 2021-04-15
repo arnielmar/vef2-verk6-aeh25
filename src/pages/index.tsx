@@ -38,6 +38,7 @@ const query = `
   query {
     allFilms {
       films {
+        id
         title
         episodeID
         openingCrawl

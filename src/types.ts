@@ -1,5 +1,17 @@
 // Hér eru þær týpur sem við skilgreinum á móti GraphQL endapunkti
 
+export interface IPerson {
+  person: {
+    id: string;
+    name?: string;
+    birthYear?: string;
+    eyeColor?: string;
+    hairColor?: string;
+    height?: number;
+    mass?: number;
+  }
+}
+
 export interface ICharacter {
   id: string;
   name?: string;
