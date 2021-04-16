@@ -1,8 +1,8 @@
 // Týpur sem við skilgreinum á móti endapunkti
 
 export type IPerson = {
-  person: ICharacter
-}
+  person: ICharacter;
+};
 
 export interface ICharacter {
   id: string;
@@ -17,7 +17,7 @@ export interface ICharacter {
 export interface IFilms {
   allFilms: {
     films: [
-      IFilm
+      IFilm,
     ]
   }
 }

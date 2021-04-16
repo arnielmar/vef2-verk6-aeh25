@@ -15,16 +15,17 @@ export function Characters({ peopleResponse }: Props): JSX.Element {
 
   const [characters, setCharacters] = useState<Array<ICharacter>>(peopleResponse.allPeople.people);
 
-  const [nextPage, setNextPage] = useState<string | undefined>(peopleResponse.allPeople.pageInfo.endCursor);
+  const { endCursor } = peopleResponse.allPeople.pageInfo;
+  const [nextPage, setNextPage] = useState<string | undefined>(endCursor);
 
   const fetchMore = async (): Promise<void> => {
     setLoading(true);
     if (nextPage) {
       const res = (await fetch(`/api/characters?after=${nextPage}`));
       if (res.ok) {
-        const peopleResponse: IPeopleResponse = await res.json();
-        const moreCharacters = peopleResponse.allPeople.people;
-        const nextCursor = peopleResponse.allPeople.pageInfo.endCursor;
+        const result: IPeopleResponse = await res.json();
+        const moreCharacters = result.allPeople.people;
+        const nextCursor = result.allPeople.pageInfo.endCursor;
         setCharacters(characters.concat(moreCharacters));
         setNextPage(nextCursor);
       }

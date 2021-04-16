@@ -8,7 +8,7 @@ import { characterFragment } from '../graphql/characterFragment';
 import { fetchSwapi } from '../lib/swapi';
 import { IFilm, IFilms } from '../types';
 
-import s from './../components/layout/Layout.module.scss';
+import s from '../components/layout/Layout.module.scss';
 
 export type PageProps = {
   films: Array<IFilm> | null;
