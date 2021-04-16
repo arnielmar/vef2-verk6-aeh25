@@ -6,6 +6,8 @@ import { Layout } from '../../components/layout/Layout';
 import { fetchCharacters } from '../../lib/swapi';
 import { IPeopleResponse } from '../../types';
 
+import s from './../../components/characters/Characters.module.scss';
+
 export type PageProps = {
   peopleResponse: IPeopleResponse;
 };
@@ -20,7 +22,7 @@ export default function PageComponent(
       <Head>
         <title>Star Wars characters</title>
       </Head>
-      <h1>Star Wars characters</h1>
+      <h1 className={s.characters__header}>Star Wars characters</h1>
       <Characters peopleResponse={peopleResponse}/>
     </Layout>
   );

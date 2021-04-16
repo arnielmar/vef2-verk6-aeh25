@@ -10,7 +10,7 @@ type Props = {
 export function Person({ person }: Props): JSX.Element {
   return (
     <div className={s.person}>
-      <h1 className={s.person__title}>{person.name}</h1>
+      <h1 className={s.person__header}>{person.name}</h1>
       <h3 className={s.person__subTitle}>Birth year:</h3>
       <p className={s.person__para}>{person.birthYear}</p>
       <h3 className={s.person__subTitle}>Eye color:</h3>
@@ -21,7 +21,9 @@ export function Person({ person }: Props): JSX.Element {
       <p className={s.person__para}>{person.height} cm</p>
       <h3 className={s.person__subTitle}>Mass:</h3>
       <p className={s.person__para}>{person.mass} kg</p>
-      <Link href="/characters">Back to characters</Link>
+      <div className={s.person__link}>
+        <Link href="/characters">Back to characters</Link>
+      </div>
     </div>
   );
 }

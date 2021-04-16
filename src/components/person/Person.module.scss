@@ -1,4 +1,21 @@
+@import './../../styles/config.scss';
 
 .person {
+  &__header {
+    font-family: $font-heading;
+    margin-top: $gutter;
+  }
 
+  &__subTitle {
+    font-family: $font-heading;
+  }
+
+  &__para {
+    font-family: $font-main;
+    margin: 0 0 $gutter/4 $gutter/4;
+  }
+
+  &__link {
+    margin-top: $gutter;
+  }
 }

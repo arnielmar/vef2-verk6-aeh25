@@ -3,7 +3,7 @@
 .layout {
   &__header {
     font-family: $font-heading;
-    margin: 1rem 0;
+    margin: $gutter/2 0;
   }
 
   &__list {
