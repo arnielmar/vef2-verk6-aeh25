@@ -13,14 +13,9 @@ type Props = {
 export function Characters({ peopleResponse }: Props): JSX.Element {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [characters, setCharacters] = useState<Array<ICharacter>>([]);
+  const [characters, setCharacters] = useState<Array<ICharacter>>(peopleResponse.allPeople.people);
 
-  const [nextPage, setNextPage] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    setCharacters(peopleResponse.allPeople.people);
-    setNextPage(peopleResponse?.allPeople?.pageInfo?.endCursor);
-  });
+  const [nextPage, setNextPage] = useState<string | undefined>(peopleResponse.allPeople.pageInfo.endCursor);
 
   const fetchMore = async (): Promise<void> => {
     setLoading(true);
