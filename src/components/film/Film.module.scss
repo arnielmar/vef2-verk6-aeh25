@@ -1,4 +1,59 @@
+@import './../../styles/config.scss';
 
 .film {
-  
+  max-width: $max-width;
+
+  &::after {
+    border-bottom: 1px solid #333;
+    content: '';
+    display: block;
+    margin: 2 * $gutter auto;
+  }
+
+  &__title {
+    font-family: $font-heading;
+    margin-bottom: $gutter;
+  }
+
+  &__row {
+    @include row();
+  }
+
+  &__colOne {
+    @include columns(4);
+    margin-right: $gutter*2;
+
+    @media (max-width: 800px) {
+      @include row;
+    }
+  }
+
+  &__openingCrawl {
+    font-family: $font-heading;
+    white-space: pre-line;
+  }
+
+  &__colTwo {
+    @include columns(8);
+
+    @media (max-width: 800px) {
+      @include row;
+    }
+  }
+
+  &__subTitle {
+    font-family: $font-heading;
+    margin-bottom: $gutter/4;
+  }
+
+  &__characters {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__character {
+    margin-bottom: $gutter/5;
+    margin-right: $gutter;
+  }
 }

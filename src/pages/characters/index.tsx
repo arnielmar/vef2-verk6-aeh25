@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 
   const result = await fetchCharacters();
 
-  peopleResponse = result ?? null;
+  peopleResponse = result;
 
   return {
     props: {

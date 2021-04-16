@@ -1,4 +1,4 @@
-// Hér eru þær týpur sem við skilgreinum á móti GraphQL endapunkti
+// Týpur sem við skilgreinum á móti endapunkti
 
 export type IPerson = {
   person: ICharacter

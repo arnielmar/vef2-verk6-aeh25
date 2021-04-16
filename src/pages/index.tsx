@@ -8,6 +8,8 @@ import { characterFragment } from '../graphql/characterFragment';
 import { fetchSwapi } from '../lib/swapi';
 import { IFilm, IFilms } from '../types';
 
+import s from './../components/layout/Layout.module.scss';
+
 export type PageProps = {
   films: Array<IFilm> | null;
 };
@@ -26,7 +28,7 @@ export default function PageComponent(
       <Head>
         <title>Star Wars films</title>
       </Head>
-      <h1>Star Wars films</h1>
+      <h1 className={s.layout__header}>Star Wars films</h1>
       {films.map((film, i) => (
         <Film key={i} film={film} />
       ))}
